@@ -242,11 +242,10 @@
         });
       }
 
-
+      var document = $document[0];
 
       // Auto-create a help menu:
-      if (this.includeCheatSheet) {
-        var document = $document[0];
+      if (this.includeCheatSheet && document) {
         var element = $rootElement[0];
         var helpMenu = angular.element(this.template);
         _add(this.cheatSheetHotkey, this.cheatSheetDescription, toggleCheatSheet);

@@ -248,11 +248,10 @@
         });
       }
 
-
+      var document = $document[0];
 
       // Auto-create a help menu:
-      if (this.includeCheatSheet) {
-        var document = $document[0];
+      if (this.includeCheatSheet && document) {
         var element = $rootElement[0];
         var helpMenu = angular.element(this.template);
         _add(this.cheatSheetHotkey, this.cheatSheetDescription, toggleCheatSheet);
@@ -539,9 +538,9 @@
 
           // this takes place outside angular, so we'll have to call
           // $apply() to make sure angular's digest happens
-          $rootScope.$apply(function() {
+          return $rootScope.$apply(function() {
             // call the original hotkey callback with the keyboard event
-            callback(event, _get(combo));
+            return callback(event, _get(combo));
           });
         };
       }
@@ -1017,7 +1016,7 @@
     }
 
     function _belongsTo(element, ancestor) {
-        if (element === document) {
+        if (element === null || element === document) {
             return false;
         }
 

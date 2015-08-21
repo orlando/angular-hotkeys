@@ -500,6 +500,19 @@ describe 'Platform specific things', ->
       hotkeys.add 'mod+e', 'description'
       expect(hotkeys.get('mod+e').format()[0]).toBe 'ctrl + e'
 
+describe 'Format should return multiple hotkeys', ->
+  beforeEach ->
+    module 'cfp.hotkeys'
+
+  it 'should display multiple combo keys', ->
+    inject (hotkeys) ->
+      hotkeys.add ['ctrl + e', 'ctrl + i'], 'description'
+      expect(hotkeys.get('ctrl + e').format()).toEqual ['ctrl + e', 'ctrl + i']
+
+  it 'should display multiple combo keys, ignoring spaces', ->
+    inject (hotkeys) ->
+      hotkeys.add ['ctrl+e', 'ctrl+i'], 'description'
+      expect(hotkeys.get('ctrl+e').format()).toEqual ['ctrl + e', 'ctrl + i']
 
 describe 'Configuration options', ->
 

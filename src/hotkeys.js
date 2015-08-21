@@ -119,6 +119,14 @@
         return combo.join(' + ');
       }
 
+      function formatCombos(combos) {
+        var combosWithNoSpaces = combos.map(function (combo) {
+          return combo.replace(/\s/g, '');
+        });
+
+        return combosWithNoSpaces.join(' ');
+      }
+
       /**
        * Hotkey object used internally for consistency
        *
@@ -154,7 +162,7 @@
         if(this._formated === null) {
           // Don't show all the possible key combos, just the first one.  Not sure
           // of usecase here, so open a ticket if my assumptions are wrong
-          var combo = this.combo[0];
+          var combo = formatCombos(this.combo);
 
           var sequence = combo.split(/[\s]/);
           for (var i = 0; i < sequence.length; i++) {
